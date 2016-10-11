@@ -3,5 +3,7 @@ from . import views
 
 urlpatterns=[
 	url('^$',views.index,name='index'),
-	url('^(?P<pk>[0-9]+)$',views.page,name='page')
+	url('^(?P<pk>[0-9]+)$',views.page,name='page'),
+	url('^add$',views.addBlog,name='new'),
+
 	]
