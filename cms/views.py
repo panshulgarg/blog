@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from .models import Blog,Comment
-from .forms import BlogForm 
+from .forms import BlogForm , CommentForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
@@ -61,6 +61,22 @@ def addBlog(request):
 	form=BlogForm()
 	context={'form':form}
 	return render(request,'form',context)
+
+@login_required(login_url='/admin/login')
+def add_comment_to_post(request, pk):
+    post = get_object_or_404(Blog, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.content = request.POST['content']
+            comment.author = request.user
+            comment.blog=Blog.objects.get(pk=pk)
+            comment.save()
+            return HttpResponse("Comment Saved")
+    else:
+        form = CommentForm()
+    return render(request, 'add_comment_to_post.html', {'form': form})
 
 
 

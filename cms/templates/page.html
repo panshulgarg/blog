@@ -3,7 +3,9 @@
 <small>{{blog.author.username}}</small>
 
 <p>&nbsp;&nbsp;&nbsp;{{blog.content}}</p>
-<h2>Comment Section  {{count}}</h2>
+<h2>Comment Section </h2>
+<a class="btn btn-default" href="{% url 'add_comment_to_post' pk=blog.pk %}">Add comment</a>
+
 
 {% for c in comment %}
 <p>
