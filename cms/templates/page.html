@@ -2,4 +2,17 @@
 <small>{{blog.date}}</small>
 <small>{{blog.author.username}}</small>
 
-<p>{{blog.content}}</p>
+<p>&nbsp;&nbsp;&nbsp;{{blog.content}}</p>
+<h2>Comment Section  {{count}}</h2>
+
+{% for c in comment %}
+<p>
+	
+	{{c.content}}<br>
+	&nbsp;&nbsp;&nbsp;{{c.author}}<br>
+	&nbsp;&nbsp;&nbsp;{{c.date}}	
+
+</p>
+{% endfor %}
+
+

@@ -10,4 +10,14 @@ class Blog(models.Model):
 	date=models.DateTimeField(auto_now_add=True)
 	author = models.ForeignKey(User, default=User.objects.get(pk=1).pk)
 
-# Create your models here.
+class Comment(models.Model):
+	content=models.TextField()
+	date=models.DateTimeField(auto_now_add=True)
+	author=models.ForeignKey(User,default=User.objects.get(pk=1).pk)
+	blog=models.ForeignKey(Blog,on_delete=models.CASCADE)
+
+	class Meta:
+		ordering=('date',)
+			
+
+
